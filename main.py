@@ -1,9 +1,7 @@
-def main():
-    print('Welcome to chess\n\n')
-    createBoard()
+import Modules.Controller as c
 
-def createBoard():
-    print('Creating board...')
+def main():
+    c.start()
 
 if __name__ == "__main__":
     main()
