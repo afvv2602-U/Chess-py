@@ -1,7 +1,6 @@
 #This module take care of all the functionalities that the board involves.
 
-def createBoard():
-    empty_board = {
+game_board = {
         'A':{'A1':0,'A2':0,'A3':0,'A4':0,'A5':0,'A6':0,'A7':0,'A8':0},
         'B':{'B1':0,'B2':0,'B3':0,'B4':0,'B5':0,'B6':0,'B7':0,'B8':0},
         'C':{'C1':0,'C2':0,'C3':0,'C4':0,'C5':0,'C6':0,'C7':0,'C8':0},
@@ -9,8 +8,9 @@ def createBoard():
         'E':{'E1':0,'E2':0,'E3':0,'E4':0,'E5':0,'E6':0,'E7':0,'E8':0},
         'F':{'F1':0,'F2':0,'F3':0,'F4':0,'F5':0,'F6':0,'F7':0,'F8':0},
         'G':{'G1':0,'G2':0,'G3':0,'G4':0,'G5':0,'G6':0,'G7':0,'G8':0},
-        'H':{'H1':0,'H2':0,'H3':0,'H4':0,'H5':0,'H6':0,'H7':0,'H8':0}
-    }
+        'H':{'H1':0,'H2':0,'H3':0,'H4':0,'H5':0,'H6':0,'H7':0,'H8':0}}
+
+def createBoard():
     #Define the starting position of white pieces
     white_board = {
     'Pawns':{'P1':'A7','P2':'B7','P3':'C7','P4':'D7','P5':'E7','P6':'F7','P7':'G7','P8':'H7'},
@@ -18,8 +18,8 @@ def createBoard():
     'Knights':{'Kn1':'B8','Kn2':'G8'},
     'Bishops':{'Bs1':'C8','Bs2':'F8'},
     'Queen':{'Q1':'D8'},
-    'King':{'K1','E8'}
-    }
+    'King':{'K1':'E8'}}
+
     #Define the starting position of black pieces
     black_board = {
     'Pawns':{'P1':'A2','P2':'B2','P3':'C2','P4':'D2','P5':'E2','P6':'F2','P2':'G2','P8':'H2'},
@@ -27,14 +27,25 @@ def createBoard():
     'Knights':{'Kn1':'B1','Kn2':'G1'},
     'Bishops':{'Bs1':'C1','Bs2':'F1'},
     'Queen':{'Q1':'D1'},
-    'King':{'K1','E1'}
-    }
+    'King':{'K1':'E1'}}
     #Update the empty board with the starter values.
-    update_all(empty = empty_board,white = white_board, black = black_board)
+    #True  = White, False = Black
+    update_board(board = white_board, sw = True)
+    update_board(board = black_board , sw = False)
+    print(game_board)
 
-def update_all(empty : dict,white : dict,black : dict):
-    #First update the white pieces.
-    for k,v in white.items():
-        for i in v:
-            print(white[k][i])
-    #Second update the black pieces.
+def update_board(board : dict, sw : bool):
+    for key_dict, nested_dict in board.items():
+        for nested_key,nested_value in nested_dict.items():
+            check_piece(nested_key,nested_value,sw)
+
+def check_piece(key : str , value : str, sw : bool):
+    if sw:
+        for k,v in game_board.items():
+            if k == value[0]:
+                game_board[k][value] = 10
+    else:
+        for k,v in game_board.items():
+            if k == value[0]:
+                game_board[k][value] = 1
+    

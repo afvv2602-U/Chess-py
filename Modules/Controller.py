@@ -1,5 +1,5 @@
 #This module is in charge of compatibility between deeper modules and main module
-import Game.board_management as b
+from Modules import board
 
 def start():
-    b.createBoard()
+    board.createBoard()
