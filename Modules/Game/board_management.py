@@ -22,7 +22,7 @@ def createBoard():
 
     #Define the starting position of black pieces
     black_board = {
-    'Pawns':{'P1':'A2','P2':'B2','P3':'C2','P4':'D2','P5':'E2','P6':'F2','P2':'G2','P8':'H2'},
+    'Pawns':{'P1':'A2','P2':'B2','P3':'C2','P4':'D2','P5':'E2','P6':'F2','P7':'G2','P8':'H2'},
     'Rooks':{'R1':'A1','R2':'H1'},
     'Knights':{'Kn1':'B1','Kn2':'G1'},
     'Bishops':{'Bs1':'C1','Bs2':'F1'},
@@ -32,20 +32,51 @@ def createBoard():
     #True  = White, False = Black
     update_board(board = white_board, sw = True)
     update_board(board = black_board , sw = False)
-    print(game_board)
+    show_board()
 
 def update_board(board : dict, sw : bool):
     for key_dict, nested_dict in board.items():
         for nested_key,nested_value in nested_dict.items():
-            check_piece(nested_key,nested_value,sw)
+            check_piece(key_dict,nested_value,sw)
 
+#Pieces:
+#White : Pawns(1) , Rooks (2) ,  Knights (3) , Bishops (4) , Queen (5) , King (6)
+#Black : Pawns(7) , Rooks (8) ,  Knights (9) , Bishops (10) , Queen (11) , King (12)
 def check_piece(key : str , value : str, sw : bool):
-    if sw:
-        for k,v in game_board.items():
+    for k,v in game_board.items():
             if k == value[0]:
-                game_board[k][value] = 10
-    else:
-        for k,v in game_board.items():
-            if k == value[0]:
-                game_board[k][value] = 1
-    
+                match(key):
+                    case 'Pawns':
+                        if sw:
+                            game_board[k][value] = 1
+                        else:
+                            game_board[k][value] = 7
+                    case 'Rooks':
+                        if sw:
+                            game_board[k][value] = 2
+                        else:
+                            game_board[k][value] = 8
+                    case 'Knights':
+                        if sw:
+                            game_board[k][value] = 3
+                        else:
+                            game_board[k][value] = 9
+                    case 'Bishops':
+                        if sw:
+                            game_board[k][value] = 4
+                        else:
+                            game_board[k][value] = 10
+                    case 'Queen':
+                        if sw:
+                            game_board[k][value] = 5
+                        else:
+                            game_board[k][value] = 11
+                    case 'King':
+                        if sw:
+                            game_board[k][value] = 6
+                        else:
+                            game_board[k][value] = 12
+                    
+def show_board():
+    for k,v in game_board.items():
+        print('%10s %10s'%(k,v))
