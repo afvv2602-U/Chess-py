@@ -1,7 +1,7 @@
-import Modules.Controller as c
+from Modules.Controller import start
 
 def main():
-    c.start()
+    start()
 
 if __name__ == "__main__":
     main()

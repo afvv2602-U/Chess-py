@@ -32,7 +32,6 @@ def createBoard():
     #True  = White, False = Black
     update_board(board = white_board, sw = True)
     update_board(board = black_board , sw = False)
-    show_board()
 
 def update_board(board : dict, sw : bool):
     for key_dict, nested_dict in board.items():
